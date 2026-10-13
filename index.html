@@ -102,7 +102,7 @@
           <h3>Netflix-style app<br>on Kubernetes</h3>
           <p>A hands-on deployment lab exploring application releases, rolling updates, rollback, blue-green, canary, and recreate strategies—plus the debugging that makes the learning real.</p>
           <div class="tag-list"><span>Kubernetes</span><span>Docker</span><span>Deployments</span><span>kubectl</span></div>
-          <div class="project-links"><a href="#case-studies">Project details <span>↗</span></a><a href="#contact">Discuss this build <span>↗</span></a></div>
+          <div class="project-links"><a href="#case-studies">Project details <span>↗</span></a><a href="https://medium.com/@Saikrishna844/kubernetes-deployment-strategies-in-action-building-netflix-by-sai-from-rolling-updates-to-3b03365831cb?postPublishedType=initial" target="_blank" rel="noopener noreferrer">Read technical blog <span>↗</span></a><a href="#contact">Discuss this build <span>↗</span></a></div>
         </div>
       </article>
 
@@ -148,7 +148,7 @@
         </article>
       </div>
       <section class="case-studies" id="case-studies" aria-labelledby="case-study-title">
-        <div class="case-study-heading"><div class="eyebrow">BEHIND THE BUILD</div><h3 id="case-study-title">A closer look at <em>the engineering.</em></h3><p>Selected project notes explain the problem, design choices, and how to validate the result. These are personal labs and portfolio builds, not claims of production deployment.</p></div>
+        <div class="case-study-heading"><div class="eyebrow">BEHIND THE BUILD</div><h3 id="case-study-title">A closer look at <em>the engineering.</em></h3><p>Selected project notes explain the problem, design choices, and validation steps. The Kubernetes case study links to the full technical walkthrough. These are personal labs and portfolio builds, not claims of production deployment.</p></div>
         <div class="case-study-list">
           <details class="case-study" open>
             <summary><span class="case-index">01</span><span><strong>Azure Landing Zone with Terraform</strong><small>Azure · Terraform · GitHub Actions · OIDC</small></span><span class="case-toggle" aria-hidden="true">+</span></summary>
@@ -162,9 +162,22 @@
             <summary><span class="case-index">03</span><span><strong>Terraform Multi-Cloud Infrastructure</strong><small>Terraform · Azure · AWS</small></span><span class="case-toggle" aria-hidden="true">+</span></summary>
             <div class="case-study-content"><div><h4>Problem</h4><p>Learning cloud infrastructure across providers requires understanding both shared IaC patterns and provider-specific resource models.</p></div><div><h4>Design</h4><p>Keep Azure and AWS deployments independently understandable, using Terraform to define networking and compute resources with provider-specific configuration.</p></div><div><h4>Validation checklist</h4><ul><li>Run format and validation checks for each configuration.</li><li>Inspect each provider's plan before provisioning.</li><li>Record outputs and destroy test resources to avoid unnecessary cloud spend.</li></ul></div><a class="case-source" href="https://github.com/saikrishna844/terraform-multi-cloud-basics" target="_blank" rel="noopener noreferrer">View repository ↗</a></div>
           </details>
-          <details class="case-study">
-            <summary><span class="case-index">04</span><span><strong>Kubernetes Deployment Strategies Lab</strong><small>Kubernetes · Docker · Deployments · Rollback</small></span><span class="case-toggle" aria-hidden="true">+</span></summary>
-            <div class="case-study-content"><div><h4>Problem</h4><p>Application updates need a controlled path to release new versions and recover when a rollout fails.</p></div><div><h4>Design</h4><p>Use a sample frontend/backend application to practice rolling updates, rollout status checks, rollback, blue-green, canary, and recreate deployment patterns.</p></div><div><h4>Validation checklist</h4><ul><li>Inspect Deployments, ReplicaSets, Pods, and rollout history with <code>kubectl</code>.</li><li>Verify the application version after a rollout.</li><li>Intentionally test a failed image update in a lab and document recovery evidence.</li></ul></div><a class="case-source" href="#case-studies">Open project overview ↗</a></div>
+          <details class="case-study kube-case-study">
+            <summary><span class="case-index">04</span><span><strong>Netflix by Sai — Kubernetes Deployment Strategies</strong><small>Docker · Kubernetes · Rolling Update · Blue-Green · Canary · Rollback</small></span><span class="case-toggle" aria-hidden="true">+</span></summary>
+            <div class="case-study-content kube-case-content">
+              <div class="kube-case-intro"><div class="card-overline">HANDS-ON APPLICATION RELEASE LAB</div><p>A streaming-style frontend/backend application used to explore Kubernetes releases, version changes, service routing, failure diagnosis, and recovery. The accompanying article documents the implementation and screenshots step by step.</p></div>
+              <div><h4>Architecture &amp; workflow</h4><ul><li>Containerize the application components with Docker and validate the application workflow.</li><li>Deploy frontend and backend workloads into the <code>netflix</code> Kubernetes namespace.</li><li>Use Deployments and Services to manage replicas and route application traffic.</li><li>Check the backend health/version endpoint at <code>/api/health</code> after changes.</li></ul></div>
+              <div class="kube-strategy-grid">
+                <article><span>01 / RELEASE</span><h4>Rolling Update</h4><p>Move from one application version to another gradually and inspect Deployment and ReplicaSet status.</p></article>
+                <article><span>02 / RECOVERY</span><h4>Rollback</h4><p>Recover from a failed rollout by returning to a known-good Deployment revision and validating the running version.</p></article>
+                <article><span>03 / TRAFFIC SWITCH</span><h4>Blue-Green</h4><p>Run separate environment versions and examine how a Service selector determines which Pods receive traffic.</p></article>
+                <article><span>04 / COEXISTING VERSIONS</span><h4>Canary</h4><p>Explore a limited version rollout and the importance of selectors and endpoint membership. This lab demonstrates selector-based routing, not weighted traffic splitting.</p></article>
+                <article><span>05 / REPLACEMENT</span><h4>Recreate</h4><p>Replace existing Pods before starting the new version, highlighting the downtime trade-off of this strategy.</p></article>
+              </div>
+              <div><h4>Failure injection &amp; troubleshooting</h4><p>An intentionally invalid image was used in the lab to reproduce an image-pull failure. The investigation used Pod status and events to identify the issue before restoring a valid version.</p><ul><li><code>kubectl get deployments,rs,pods -n netflix</code></li><li><code>kubectl describe pod &lt;pod-name&gt; -n netflix</code></li><li><code>kubectl rollout status deployment/netflix-backend -n netflix</code></li><li><code>kubectl rollout history deployment/netflix-backend -n netflix</code></li></ul></div>
+              <div><h4>What this project demonstrates</h4><ul><li>How Deployment strategies affect application availability and replacement behavior.</li><li>How Services and selectors influence traffic routing between versions.</li><li>How to diagnose <code>ImagePullBackOff</code> through Kubernetes events.</li><li>Why a successful rollout should be confirmed using workload status and application-level health/version checks.</li></ul></div>
+              <div class="kube-case-actions"><a class="case-source" href="https://medium.com/@Saikrishna844/kubernetes-deployment-strategies-in-action-building-netflix-by-sai-from-rolling-updates-to-3b03365831cb?postPublishedType=initial" target="_blank" rel="noopener noreferrer">Read the full Medium walkthrough ↗</a><a class="case-source" href="https://github.com/saikrishna844/saiflix-portfolio" target="_blank" rel="noopener noreferrer">SaiFlix source repository ↗</a></div>
+            </div>
           </details>
         </div>
       </section>
@@ -250,6 +263,10 @@
         <article class="blog-card" data-topics="kubernetes devops">
           <div class="blog-card-art blog-art-kube"><span>FIELD NOTE / 04</span><b>KUBERNETES<br>FROM BASICS</b><i>↗</i></div>
           <div class="blog-card-content"><div class="card-overline">KUBERNETES · LEARNING SERIES</div><h3>Kubernetes From Basics to Advanced — Part 1</h3><p>Fundamentals that help explain how Kubernetes workloads and core resources fit together.</p><div class="blog-card-footer"><span>Hashnode / LinkedIn</span><a href="https://saikrishnavempati.hashnode.dev/" target="_blank" rel="noreferrer">Browse Hashnode ↗</a></div></div>
+        </article>
+        <article class="blog-card kube-medium-card" data-topics="kubernetes devops docker">
+          <div class="blog-card-art blog-art-kube"><span>FIELD NOTE / 07</span><b>NETFLIX BY SAI<br>DEPLOYMENT STRATEGIES</b><i>↗</i></div>
+          <div class="blog-card-content"><div class="card-overline">KUBERNETES · RELEASE ENGINEERING</div><h3>Kubernetes Deployment Strategies in Action</h3><p>A practical walkthrough of Rolling Updates, Rollbacks, Blue-Green, Canary, and Recreate deployments, including failure investigation and recovery.</p><div class="blog-card-footer"><span>Medium · Technical walkthrough</span><a href="https://medium.com/@Saikrishna844/kubernetes-deployment-strategies-in-action-building-netflix-by-sai-from-rolling-updates-to-3b03365831cb?postPublishedType=initial" target="_blank" rel="noopener noreferrer">Read full article ↗</a></div></div>
         </article>
         <article class="blog-card" data-topics="terraform azure devops">
           <div class="blog-card-art blog-art-drift"><span>FIELD NOTE / 05</span><b>DETECT<br>INFRA DRIFT</b><i>↗</i></div>
