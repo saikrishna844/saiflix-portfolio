@@ -1,0 +1,44 @@
+
+name: SaiFlix CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate SaiFlix website
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify required files
+        run: |
+          test -s index.html
+          test -s styles.css
+          test -s script.js
+          echo "Required website files exist."
+
+      - name: Verify HTML references
+        run: |
+          grep -qi '<!doctype html' index.html
+          grep -q 'styles.css' index.html
+          grep -q 'script.js' index.html
+          echo "Basic HTML checks passed."
+
+      - name: Check JavaScript syntax
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Validate JavaScript
+        run: node --check script.js
