@@ -177,3 +177,13 @@ footer{font-size:.78rem}
 .kube-medium-card{border-color:rgba(229,9,20,.35)}
 .kube-medium-card:hover{border-color:var(--red)}
 @media(max-width:700px){.kube-strategy-grid{grid-template-columns:1fr}.kube-strategy-grid article:last-child{grid-column:auto}.kube-case-content{padding-inline:15px!important}.kube-case-intro{padding:15px!important}.kube-case-actions{flex-direction:column;align-items:flex-start}}
+
+/* Featured Kubernetes project title and original local diagram gallery */
+.feature-project-subtitle{font-size:.72rem!important;letter-spacing:.04em;color:#ff737c!important;margin:-5px 0 18px!important}
+.kube-visual-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0 28px}
+.kube-visual-card{min-width:0;margin:0;background:#101013;border:1px solid #303035;border-radius:5px;overflow:hidden}
+.kube-visual-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#0c0c0f}
+.kube-visual-card figcaption{display:flex;flex-direction:column;gap:5px;padding:12px 14px}
+.kube-visual-card figcaption strong{font-size:.7rem;letter-spacing:.07em;color:#f4f4f5;text-transform:uppercase}
+.kube-visual-card figcaption span{font-size:.7rem;line-height:1.5;color:#a8a8b0}
+@media(max-width:700px){.kube-visual-gallery{grid-template-columns:1fr}.kube-visual-card img{aspect-ratio:16/9}.feature-project-subtitle{line-height:1.6}}

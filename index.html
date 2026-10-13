@@ -98,10 +98,10 @@
           <div class="feature-art-bottom"><span>KUBERNETES / DEPLOYMENT STRATEGIES</span><span>01 — 05</span></div>
         </div>
         <div class="feature-info">
-          <div class="project-label">01 <span>•</span> CONTAINERS &amp; ORCHESTRATION</div>
-          <h3>Netflix-style app<br>on Kubernetes</h3>
-          <p>A hands-on deployment lab exploring application releases, rolling updates, rollback, blue-green, canary, and recreate strategies—plus the debugging that makes the learning real.</p>
-          <div class="tag-list"><span>Kubernetes</span><span>Docker</span><span>Deployments</span><span>kubectl</span></div>
+          <div class="project-label">01 <span>•</span> KUBERNETES &amp; RELEASE ENGINEERING</div>
+          <h3>Kubernetes Deployment<br>Strategies in Action</h3><p class="feature-project-subtitle">Netflix by Sai · Hands-on release engineering lab</p>
+          <p>A practical Kubernetes release lab using “Netflix by Sai” to explore five deployment strategies, service routing, failure diagnosis, and recovery—from rollout checks to rollback verification.</p>
+          <div class="tag-list"><span>Kubernetes</span><span>Docker</span><span>Rolling Update</span><span>Blue-Green</span><span>Canary</span><span>Rollback</span></div>
           <div class="project-links"><a href="#case-studies">Project details <span>↗</span></a><a href="https://medium.com/@Saikrishna844/kubernetes-deployment-strategies-in-action-building-netflix-by-sai-from-rolling-updates-to-3b03365831cb?postPublishedType=initial" target="_blank" rel="noopener noreferrer">Read technical blog <span>↗</span></a><a href="#contact">Discuss this build <span>↗</span></a></div>
         </div>
       </article>
@@ -163,9 +163,15 @@
             <div class="case-study-content"><div><h4>Problem</h4><p>Learning cloud infrastructure across providers requires understanding both shared IaC patterns and provider-specific resource models.</p></div><div><h4>Design</h4><p>Keep Azure and AWS deployments independently understandable, using Terraform to define networking and compute resources with provider-specific configuration.</p></div><div><h4>Validation checklist</h4><ul><li>Run format and validation checks for each configuration.</li><li>Inspect each provider's plan before provisioning.</li><li>Record outputs and destroy test resources to avoid unnecessary cloud spend.</li></ul></div><a class="case-source" href="https://github.com/saikrishna844/terraform-multi-cloud-basics" target="_blank" rel="noopener noreferrer">View repository ↗</a></div>
           </details>
           <details class="case-study kube-case-study">
-            <summary><span class="case-index">04</span><span><strong>Netflix by Sai — Kubernetes Deployment Strategies</strong><small>Docker · Kubernetes · Rolling Update · Blue-Green · Canary · Rollback</small></span><span class="case-toggle" aria-hidden="true">+</span></summary>
+            <summary><span class="case-index">04</span><span><strong>Kubernetes Deployment Strategies in Action</strong><small>Netflix by Sai · Docker · Kubernetes · Rolling Update · Blue-Green · Canary · Rollback · Recreate</small></span><span class="case-toggle" aria-hidden="true">+</span></summary>
             <div class="case-study-content kube-case-content">
               <div class="kube-case-intro"><div class="card-overline">HANDS-ON APPLICATION RELEASE LAB</div><p>A streaming-style frontend/backend application used to explore Kubernetes releases, version changes, service routing, failure diagnosis, and recovery. The accompanying article documents the implementation and screenshots step by step.</p></div>
+              <div class="kube-visual-gallery" aria-label="Kubernetes project diagrams">
+                <figure class="kube-visual-card"><img src="assets/kubernetes/architecture.svg" alt="Architecture diagram showing the Netflix by Sai frontend, Kubernetes Service, backend Deployment, and Pods." loading="lazy"><figcaption><strong>01 / Architecture</strong><span>Frontend → Service → Backend Pods</span></figcaption></figure>
+                <figure class="kube-visual-card"><img src="assets/kubernetes/deployment-strategies.svg" alt="Visual comparison of Rolling Update, Rollback, Blue-Green, Canary, and Recreate deployment strategies." loading="lazy"><figcaption><strong>02 / Release strategies</strong><span>Five deployment and recovery patterns</span></figcaption></figure>
+                <figure class="kube-visual-card"><img src="assets/kubernetes/image-pullbackoff.svg" alt="Troubleshooting flow for an invalid image resulting in ImagePullBackOff, inspecting Pod events, and restoring a valid image." loading="lazy"><figcaption><strong>03 / Failure investigation</strong><span>ImagePullBackOff → Events → Recovery</span></figcaption></figure>
+                <figure class="kube-visual-card"><img src="assets/kubernetes/validation.svg" alt="Kubernetes validation checklist with rollout status, Deployment and ReplicaSet inspection, and application health endpoint verification." loading="lazy"><figcaption><strong>04 / Validation</strong><span>Workload status + application health</span></figcaption></figure>
+              </div>
               <div><h4>Architecture &amp; workflow</h4><ul><li>Containerize the application components with Docker and validate the application workflow.</li><li>Deploy frontend and backend workloads into the <code>netflix</code> Kubernetes namespace.</li><li>Use Deployments and Services to manage replicas and route application traffic.</li><li>Check the backend health/version endpoint at <code>/api/health</code> after changes.</li></ul></div>
               <div class="kube-strategy-grid">
                 <article><span>01 / RELEASE</span><h4>Rolling Update</h4><p>Move from one application version to another gradually and inspect Deployment and ReplicaSet status.</p></article>
