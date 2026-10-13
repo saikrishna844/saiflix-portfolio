@@ -1,73 +1,243 @@
-# SaiFlix — Netflix-inspired Cloud & DevOps portfolio
+# SaiFlix — Cloud & DevOps Engineer Portfolio
 
-A responsive, no-build static website concept for Sai Krishna. It uses an original dark cinematic interface inspired by streaming-service browsing patterns, with custom CSS project art (no third-party image dependency).
+A cinematic, Netflix-inspired portfolio showcasing my work in **Azure Cloud, Infrastructure as Code, DevOps automation, CI/CD, and cloud infrastructure engineering**.
 
-## Run locally
+🌐 **Live Website:** [saikrishnavempati.com](https://saikrishnavempati.com)  
+🧪 **Preview Website:** [preview.saikrishnavempati.com](https://preview.saikrishnavempati.com)  
+💻 **GitHub:** [saikrishna844](https://github.com/saikrishna844)  
+📝 **Technical Blog:** [Hashnode](https://saikrishnavempati.hashnode.dev/)  
+💼 **LinkedIn:** [Sai Krishna Vempati](https://in.linkedin.com/in/saikrishna-vempati)
 
-### Option A: Python
-Open a terminal in this folder and run:
+---
+
+## 🎬 About SaiFlix
+
+SaiFlix is a personal portfolio designed to present cloud and DevOps engineering projects through a modern, cinematic browsing experience.
+
+Instead of a traditional resume-style website, SaiFlix organizes technical work into browsable sections for projects, experience, skills, certifications, and technical articles.
+
+The goal is to make it easier for recruiters, engineers, and hiring managers to explore my technical interests, practical labs, and engineering approach.
+
+## ✨ Features
+
+- **Cinematic UI:** Dark interface with a distinctive red accent and streaming-inspired layout.
+- **Responsive Design:** Adaptable layouts for desktop, tablet, and mobile screens.
+- **Project Showcase:** Technical projects with descriptions, architecture details, and implementation notes.
+- **Case Studies:** Selected projects organized around problems, design decisions, implementation, and validation.
+- **Technical Journal:** Blog listings with search and topic filters.
+- **Skills & Experience:** A structured overview of cloud, infrastructure, automation, and operations experience.
+- **Certifications:** A dedicated section for professional certifications and credentials.
+- **Recruiter-Friendly Navigation:** Direct access to projects, GitHub, LinkedIn, resume requests, and contact information.
+- **Lightweight Architecture:** Static HTML, CSS, and JavaScript with no application server or package installation required.
+- **Accessibility Considerations:** Keyboard focus styles and responsive navigation.
+
+## 🛠️ Technology Stack
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Page structure and semantic content |
+| CSS3 | Responsive layouts, cinematic styling, and visual effects |
+| JavaScript | Navigation, interactions, search, and filtering |
+| Git & GitHub | Version control and source code hosting |
+| GitHub Actions | Automated code validation |
+| Cloudflare Pages | Website hosting and continuous deployment |
+| Custom CSS artwork | Original project visuals without external image dependencies |
+
+Google Fonts are used for typography. If they are unavailable, the website falls back to system fonts.
+
+## 🏗️ Architecture
+
+```text
+Developer
+    |
+    | Edit HTML / CSS / JavaScript
+    v
+Local Development
+    |
+    | Git commit and push
+    v
+GitHub Repository
+    |
+    +---- GitHub Actions
+    |       |
+    |       +---- Required-file checks
+    |       +---- Basic HTML reference checks
+    |       +---- JavaScript syntax validation
+    |
+    +---- Cloudflare Pages
+             |
+             +---- Build / deployment
+             |
+             v
+       Live SaiFlix Website
+       saikrishnavempati.com
+```
+
+**Deployment model:** Cloudflare Pages is connected directly to the GitHub repository. New commits pushed to the configured production branch trigger automatic deployments. GitHub Actions performs separate validation checks.
+
+The current CI workflow is a lightweight validation pipeline, not a complete browser-testing or security-testing suite.
+
+## 📂 Project Structure
+
+```text
+saiflix-portfolio/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── index.html
+├── styles.css
+├── script.js
+└── README.md
+```
+
+- `index.html` — Main website structure and content.
+- `styles.css` — Theme, layout, responsive behavior, and visual styling.
+- `script.js` — Client-side interactions, navigation, search, and filtering.
+- `.github/workflows/ci.yml` — GitHub Actions validation workflow.
+- `README.md` — Project documentation.
+
+## 🚀 Run Locally
+
+SaiFlix is a static website. You do not need Node.js, React, or a package manager to run it.
+
+### Prerequisites
+
+- Git
+- Python 3, or Visual Studio Code with the Live Server extension
+- A modern web browser
+
+### Option 1: Clone the repository
+
+```bash
+git clone https://github.com/saikrishna844/saiflix-portfolio.git
+cd saiflix-portfolio
+```
+
+### Option 2: Start a local Python server
+
+From the project directory, run:
 
 ```bash
 python -m http.server 8000
 ```
 
-Open http://localhost:8000
+On Windows, you can also use:
 
-### Option B: VS Code
-Install the **Live Server** extension, right-click `index.html`, and select **Open with Live Server**.
+```powershell
+py -m http.server 8000
+```
 
-## Before publishing
+Open:
 
-Search and replace these placeholders in `index.html`:
+[http://localhost:8000](http://localhost:8000)
 
-- Confirm the GitHub, LinkedIn, email, and resume links point to your preferred public profiles and current resume.
-- Replace the generic project collection links with the exact repository URL for each project as you verify them.
-- Confirm experience duration, certification names/status, and all project descriptions.
-- Update the project claims so they accurately reflect work you have completed. Do not publish invented metrics or imply production experience for a lab.
+Press `Ctrl+C` in the terminal to stop the server.
 
-## Notes
+### Option 3: Use Visual Studio Code
 
-- No React, Node.js, or package installation is required.
-- Google Fonts are loaded from Google Fonts; if offline, the page falls back to system fonts.
-- This is a starter concept and is not connected to your existing Hugo/PaperMod site yet. Test it independently first. After approval, the design can be ported into your Hugo site while preserving your existing domain and content.
-- The design is Netflix-inspired, but it does not use Netflix logos, proprietary assets, or claim affiliation with Netflix.
+1. Open the project folder in VS Code.
+2. Install the **Live Server** extension.
+3. Right-click `index.html`.
+4. Select **Open with Live Server**.
 
-## Expanded content
+## 🔄 CI/CD Workflow
 
-This version adds project entries based on the public Projects page, a Technical Blog section based on the public publications page, and an expanded certification collection based on the public portfolio/profile. Please verify certification status and link individual badges before publishing.
+The repository contains a GitHub Actions workflow at `.github/workflows/ci.yml`.
 
+The current workflow runs on pushes to `main` and pull requests targeting `main`.
 
-## SaiFlix v2 improvements
+It validates:
 
-- Added a profile identity ribbon and more recruiter-focused positioning.
-- Added a six-card technical journal with search and topic filters.
-- Blog links point to public publication pages where direct article URLs should be verified before launch.
-- Updated contact email and LinkedIn URL based on the public portfolio.
-- The catalogue is static and lightweight; no backend or package installation required.
+1. The presence of `index.html`, `styles.css`, and `script.js`.
+2. Basic HTML document and asset references.
+3. JavaScript syntax using Node.js.
 
-Before publishing, replace generic GitHub links with exact repository URLs and confirm every article title/URL. Keep claims and metrics aligned with your real experience.
+### Typical development workflow
 
+```bash
+git checkout -b feature/update-portfolio
 
-## v3 improvements (October 2026)
+# Make and test your changes locally
 
-- Increased body copy, card text, controls and navigation readability.
-- Added four expandable project case studies with problem, design and validation checklists.
-- Made GitHub, resume, contact and LinkedIn actions easier to find.
-- Corrected the Blog navigation anchor and changed unverified direct-article labels to publication-listing links.
-- Added visible keyboard focus, improved mobile navigation and responsive case-study layouts.
-- Kept project claims framed as portfolio builds/labs where appropriate; no fabricated production metrics or test outputs were added.
+git add .
+git commit -m "Improve portfolio hero section"
+git push -u origin feature/update-portfolio
+```
 
-### Run locally
+Open a pull request on GitHub, review the CI result, and merge the changes into `main` when ready.
 
-From this folder, run `python -m http.server 8001`, then open `http://localhost:8001`.
+Cloudflare Pages then deploys changes from the connected production branch.
 
-### Before publishing
+**Note:** CI validation and Cloudflare deployment are separate processes. To prevent unvalidated changes from reaching production, configure GitHub branch protection or a ruleset requiring the CI status check before merging. A direct push to `main` may still trigger a Cloudflare deployment even if CI fails.
 
-Review the resume URL and current experience dates; verify each certification against the issuing body; replace publication-listing links with exact article URLs where available; and confirm each GitHub repository URL. The website's project index is used where an exact repository URL has not been confirmed.
+## ☁️ Deployment
 
+SaiFlix is hosted on Cloudflare Pages and connected to the GitHub repository.
 
-## Link update notes
-- Internal navigation stays within SaiFlix sections.
-- Links that previously pointed to the old Hugo `/projects/` or `/posts/` pages have been redirected to SaiFlix case studies or the Hashnode author page.
-- Until the actual resume PDF is added, resume actions open a prefilled email request instead of sending visitors to the old Hugo site. Replace this with a direct PDF link once the resume file is provided.
-- Please verify every external GitHub/article destination before production deployment.
+- **Production:** [https://saikrishnavempati.com](https://saikrishnavempati.com)
+- **Preview:** [https://preview.saikrishnavempati.com](https://preview.saikrishnavempati.com)
+- **Source repository:** [https://github.com/saikrishna844/saiflix-portfolio](https://github.com/saikrishna844/saiflix-portfolio)
+
+The current setup uses a static-site deployment with no backend service or build dependencies.
+
+For future changes, test locally first, push the code, review the CI result, and verify the Cloudflare deployment.
+
+## ☁️ Areas Showcased
+
+The portfolio highlights practical learning and engineering work in areas such as:
+
+- Microsoft Azure infrastructure and administration
+- Terraform and Infrastructure as Code
+- Azure infrastructure provisioning and governance
+- Terraform drift detection and automation
+- GitHub Actions and CI/CD workflows
+- Docker and Kubernetes learning projects
+- Hybrid infrastructure and Windows Server administration
+- Technical documentation and engineering case studies
+
+Project descriptions distinguish hands-on labs and portfolio implementations from professional production experience.
+
+## 🔐 Security & Reliability
+
+- No application secrets or cloud credentials are required to serve the static website.
+- GitHub Actions uses read-only repository permissions for its current validation workflow.
+- HTTPS is enabled for the configured Cloudflare Pages custom domains.
+- Changes can be reviewed through GitHub before merging.
+- The original Hugo/PaperMod portfolio repository remains separate from SaiFlix.
+
+Do not commit passwords, access tokens, private keys, or other secrets to the repository.
+
+## 🗺️ Roadmap
+
+- [x] Create the cinematic portfolio interface.
+- [x] Add project, experience, skills, certifications, and blog sections.
+- [x] Host the website using Cloudflare Pages.
+- [x] Connect the custom domain.
+- [x] Add GitHub Actions validation.
+- [ ] Add required CI status checks before production merges.
+- [ ] Expand automated HTML, accessibility, and browser tests.
+- [ ] Verify every external project, certification, and article link.
+- [ ] Add a direct resume PDF link.
+- [ ] Continue improving project case studies and architecture documentation.
+
+## 👨‍💻 About Me
+
+I'm Sai Krishna Vempati, a Cloud & DevOps professional interested in building secure, reliable, and automated infrastructure.
+
+My technical interests include Microsoft Azure, Terraform, infrastructure automation, CI/CD, cloud operations, and container technologies.
+
+SaiFlix is both my professional portfolio and a practical exercise in building, validating, deploying, and maintaining a static website through a Git-based workflow.
+
+- **Portfolio:** [saikrishnavempati.com](https://saikrishnavempati.com)
+- **GitHub:** [saikrishna844](https://github.com/saikrishna844)
+- **LinkedIn:** [Connect with me](https://in.linkedin.com/in/saikrishna-vempati)
+- **Technical Blog:** [Hashnode](https://saikrishnavempati.hashnode.dev/)
+- **Email:** vemsaikrishna@gmail.com
+
+## 📄 License
+
+Unless otherwise specified, the source code is available under the MIT License. If you intend to use this project as an open-source template, add a `LICENSE` file containing the MIT License text and your chosen copyright notice.
+
+---
+
+*Built with curiosity, documented through practice, and deployed with automation.*
